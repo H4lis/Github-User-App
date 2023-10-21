@@ -12,6 +12,4 @@ object RetrofitClient {
         .build()
 
     val apiInstance = retrofit.create(Api::class.java)
-
-
 }

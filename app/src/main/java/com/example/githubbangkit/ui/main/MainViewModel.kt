@@ -13,6 +13,8 @@ import retrofit2.Response
 
 class MainViewModel : ViewModel() {
     val listUsers = MutableLiveData<ArrayList<User>>()
+//    val listUsers: MutableLiveData<ArrayList<User>> = MutableLiveData()
+
 
     fun setSearchUsers(query: String){
         RetrofitClient.apiInstance
@@ -26,7 +28,7 @@ class MainViewModel : ViewModel() {
                         listUsers.postValue(response.body()?.items)
                     }
                 }
-//kopi
+
                 override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                     Log.d("Failure", t.message.toString())
                 }

@@ -1,15 +1,15 @@
 package com.example.githubbangkit.ui.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.AbsSavedState
 import android.view.KeyEvent
 import android.view.View
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubbangkit.R
+import com.example.githubbangkit.data.model.User
 import com.example.githubbangkit.databinding.ActivityMainBinding
+import com.example.githubbangkit.ui.detail.DetailUserActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +25,17 @@ class MainActivity : AppCompatActivity() {
 
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
+
+
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: User) {
+                Intent(this@MainActivity, DetailUserActivity::class.java).also{
+                    it.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
+                    startActivity(it)
+                }
+
+            }
+        })
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
 
         binding.apply {
@@ -34,8 +45,8 @@ class MainActivity : AppCompatActivity() {
 
             btnSearch.setOnClickListener{
                 searchUser()
-
             }
+
             etQuery.setOnKeyListener{ v, keyCode, event ->
                 if(event.action == KeyEvent.ACTION_DOWN && keyCode ==  KeyEvent.KEYCODE_ENTER){
                     searchUser()
