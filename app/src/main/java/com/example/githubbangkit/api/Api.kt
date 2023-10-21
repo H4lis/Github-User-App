@@ -10,26 +10,26 @@ import retrofit2.http.Query
 
 interface Api {
     @GET("search/users")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     fun getSearchUsers(
         @Query("q") query: String
     ): Call<UserResponse>
 
 
     @GET("users/{username}")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     fun getUserDetail(
         @Path("username") username: String
     ):Call<DetailUserResponse>
 
     @GET("users/{username}/followers")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     fun getFollowers(
         @Path("username") username: String
     ): Call<ArrayList<User>>
 
     @GET("users/{username}/following")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     fun getFollowing(
         @Path("username") username: String
     ): Call<ArrayList<User>>
